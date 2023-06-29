@@ -27,7 +27,7 @@ struct ContentView: View {
         return amountPerPerson
     }
     
-    // calculate the total payable including the tip
+    // calculate the total amount including the tip
     var totalAmount: Double {
         let tipSelection = Double(tipPercentage)
         
@@ -44,12 +44,19 @@ struct ContentView: View {
                     TextField("Amount", value: $billAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .keyboardType(.decimalPad)
                         .focused($amountIsFocused)
-                    
-                    Picker("Number of people", selection: $numberOfPeople) {
+                } header: {
+                    Text("Bill amount")
+                }
+                
+                Section {
+                    Picker("Select:", selection: $numberOfPeople) {
                         ForEach(2..<21) {
                             Text("\($0) people")
                         }
                     }
+                    .pickerStyle(.navigationLink)
+                } header: {
+                    Text("Number of people")
                 }
                 
                 Section {
@@ -58,7 +65,7 @@ struct ContentView: View {
                             Text($0, format: .percent)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.navigationLink)
                 } header: {
                     Text("Tip percentage")
                 }
@@ -72,7 +79,7 @@ struct ContentView: View {
                 Section {
                     Text(totalAmount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 } header: {
-                    Text("Total amount including Tip")
+                    Text("Total including Tip")
                 }
             }
             .navigationTitle("WeSplit")
