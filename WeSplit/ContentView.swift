@@ -13,8 +13,6 @@ struct ContentView: View {
     @State private var tipPercentage = 10
     @FocusState private var amountIsFocused: Bool
     
-    let tipPercentages = [10, 15, 20, 25, 0]
-    
     // calculate the total payable per person here
     var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople + 2)
@@ -83,6 +81,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("WeSplit")
+
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
